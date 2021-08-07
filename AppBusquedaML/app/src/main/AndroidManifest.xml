@@ -25,10 +25,17 @@
 
         <activity
             android:name=".search.SearchActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.AppBusquedaML.NoActionBar">
-        <intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+
+            <intent-filter>
             <action android:name="android.intent.action.SEARCH" />
         </intent-filter>
+
         </activity>
 
     </application>

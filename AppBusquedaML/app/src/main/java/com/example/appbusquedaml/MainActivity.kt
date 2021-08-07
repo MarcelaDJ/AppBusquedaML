@@ -1,6 +1,7 @@
 package com.example.appbusquedaml
 
 import android.app.SearchManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -16,6 +17,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.appbusquedaml.databinding.ActivityMainBinding
+import com.example.appbusquedaml.search.SearchActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,8 +56,8 @@ class MainActivity : AppCompatActivity() {
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         (menu.findItem(R.id.search).actionView as SearchView).apply {
-            setSearchableInfo(searchManager.getSearchableInfo(componentName))
-            setIconifiedByDefault(false) // Do not iconify the widget; expand it by default
+            setSearchableInfo(searchManager.getSearchableInfo(ComponentName(this@MainActivity,SearchActivity::class.java)))
+            isIconifiedByDefault = false // Do not iconify the widget; expand it by default
         }
 
         return true

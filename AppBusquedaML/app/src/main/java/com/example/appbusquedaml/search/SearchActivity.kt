@@ -30,9 +30,9 @@ class SearchActivity : Activity() {
             if (Intent.ACTION_SEARCH == intent.action) {
                 val query = intent.getStringExtra(SearchManager.QUERY)
                 Log.i(TAG,"Buscaste: $query")
-                val myToast = Toast.makeText(applicationContext,"Buscaste: $query",Toast.LENGTH_LONG)
+                /*val myToast = Toast.makeText(applicationContext,"Buscaste: $query",Toast.LENGTH_LONG)
                 myToast.setGravity(Gravity.LEFT,200,200)
-                myToast.show()
+                myToast.show()*/
 
                /* Gson gson = new Gson()
                 gson.fromJson(response, Response)
