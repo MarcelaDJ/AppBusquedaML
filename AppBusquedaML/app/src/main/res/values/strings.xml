@@ -12,4 +12,10 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="searchableHint">Buscar en Mercado Libre</string>
     <string name="app_label">AppBusquedaML</string>
+    <string name="sample_title">Moto G30 Dual SIM 128 GB gris tornasol 4 GB RAM</string>
+    <string name="price_sample">$669.900</string>
+    <string name="quota_sample">en 36x $ 18.608</string>
+    <string name="shipping_sample">Envio gratis</string>
+    <string name="availability_sample">Disponibilidad en 2 colores</string>
+    <string name="score_sample">120</string>
 </resources>

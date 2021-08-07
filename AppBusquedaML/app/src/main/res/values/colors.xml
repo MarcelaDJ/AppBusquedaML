@@ -8,5 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="yellowML">#FCE417</color>
+    <color name="blueML">#2A57B0</color>
 
 </resources>
