@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.widget.Toast
+import com.example.appbusquedaml.model.Response
+import com.google.gson.Gson
 
 class SearchActivity : Activity() {
 
@@ -31,6 +33,10 @@ class SearchActivity : Activity() {
                 val myToast = Toast.makeText(applicationContext,"Buscaste: $query",Toast.LENGTH_LONG)
                 myToast.setGravity(Gravity.LEFT,200,200)
                 myToast.show()
+
+               /* Gson gson = new Gson()
+                gson.fromJson(response, Response)
+                Log.i(TAG,data.toString())*/
             }
         }
 }
