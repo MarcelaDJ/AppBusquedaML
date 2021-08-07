@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         (menu.findItem(R.id.search).actionView as SearchView).apply {
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
-           // setIconifiedByDefault(false) // Do not iconify the widget; expand it by default
+            setIconifiedByDefault(false) // Do not iconify the widget; expand it by default
         }
 
         return true
