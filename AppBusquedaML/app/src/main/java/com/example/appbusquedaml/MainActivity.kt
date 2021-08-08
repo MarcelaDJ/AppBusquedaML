@@ -19,9 +19,14 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.appbusquedaml.databinding.ActivityMainBinding
+import com.example.appbusquedaml.manager.ApiClient
+import com.example.appbusquedaml.manager.ApiService
+import com.example.appbusquedaml.model.Response
 import com.example.appbusquedaml.search.SearchActivity
 import com.example.appbusquedaml.ui.gallery.GalleryFragment
 import com.google.android.material.navigation.NavigationView
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
 
@@ -89,9 +94,6 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private fun doSearch(query: String) {
-
-    }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
@@ -105,10 +107,12 @@ class MainActivity : AppCompatActivity() {
             val query = intent.getStringExtra(SearchManager.QUERY)
             Log.i(TAG,"Buscaste: $query")
             val myToast = Toast.makeText(applicationContext,"Buscaste: $query", Toast.LENGTH_LONG)
-            myToast.setGravity(Gravity.LEFT,200,200)
+            myToast.setGravity(Gravity.START,200,200)
             myToast.show()
 
-            replaceFragment(GalleryFragment())
+            if (query != null) {
+                searchByName(query)
+            }
         }
     }
 
@@ -120,6 +124,21 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
+    private fun searchByName(query: String) {
+        doAsync {
+            val call: retrofit2.Response<Response>? = ApiClient.getRetrofit().create(ApiService::class.java).getItemsBySearch("search?q=$query").execute()
+            val items = call?.body() as Response
+            uiThread {
+                if(items.paging?.total!! >= 0) {
+                    replaceFragment(GalleryFragment())
 
-
+                }else{
+                    val myToast = Toast.makeText(applicationContext,"Sin Resultados", Toast.LENGTH_LONG)
+                    myToast.setGravity(Gravity.START,200,200)
+                    myToast.show()
+                    //showErrorDialog()
+                }
+            }
+        }
+    }
 }
