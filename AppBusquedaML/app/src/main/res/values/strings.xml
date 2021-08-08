@@ -18,4 +18,5 @@
     <string name="shipping_sample">Envio gratis</string>
     <string name="availability_sample">Disponibilidad en 2 colores</string>
     <string name="score_sample">120</string>
+    <string name="shopping_cart">Carrito de Compras</string>
 </resources>
