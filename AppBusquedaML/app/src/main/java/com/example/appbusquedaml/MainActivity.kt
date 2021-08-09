@@ -1,7 +1,6 @@
 package com.example.appbusquedaml
 
 import android.app.SearchManager
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -22,11 +21,12 @@ import com.example.appbusquedaml.databinding.ActivityMainBinding
 import com.example.appbusquedaml.manager.ApiClient
 import com.example.appbusquedaml.manager.ApiService
 import com.example.appbusquedaml.model.Response
-import com.example.appbusquedaml.search.SearchActivity
 import com.example.appbusquedaml.ui.gallery.GalleryFragment
 import com.google.android.material.navigation.NavigationView
+import com.google.gson.Gson
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+import retrofit2.Call
+import retrofit2.Callback
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,9 +48,12 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(setOf(
-              //  R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow), drawerLayout)
-                R.id.nav_home, R.id.nav_slideshow), drawerLayout)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                //  R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow), drawerLayout)
+                R.id.nav_home, R.id.nav_slideshow
+            ), drawerLayout
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
@@ -63,26 +66,26 @@ class MainActivity : AppCompatActivity() {
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         (menu.findItem(R.id.search).actionView as SearchView).apply {
-         //  setSearchableInfo(searchManager.getSearchableInfo(ComponentName(this@MainActivity,SearchActivity::class.java)))
+            //  setSearchableInfo(searchManager.getSearchableInfo(ComponentName(this@MainActivity,SearchActivity::class.java)))
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
             isIconifiedByDefault = false // Do not iconify the widget; expand it by default
 
-       /*  setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    if(!newText.isNullOrBlank())
-                        Log.i(TAG,"Buscaste: $query")
-                    val myToast = Toast.makeText(applicationContext,"Buscaste: $query", Toast.LENGTH_LONG)
-                    myToast.setGravity(Gravity.LEFT,200,200)
-                    myToast.show()
+            /*  setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                     override fun onQueryTextChange(newText: String?): Boolean {
+                         if(!newText.isNullOrBlank())
+                             Log.i(TAG,"Buscaste: $query")
+                         val myToast = Toast.makeText(applicationContext,"Buscaste: $query", Toast.LENGTH_LONG)
+                         myToast.setGravity(Gravity.LEFT,200,200)
+                         myToast.show()
 
-                    replaceFragment(GalleryFragment())
-                    return true
-                }
+                         replaceFragment(GalleryFragment())
+                         return true
+                     }
 
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    return false
-                }
-            })*/
+                     override fun onQueryTextSubmit(query: String?): Boolean {
+                         return false
+                     }
+                 })*/
         }
 
         return true
@@ -105,40 +108,55 @@ class MainActivity : AppCompatActivity() {
 
         if (Intent.ACTION_SEARCH == intent.action) {
             val query = intent.getStringExtra(SearchManager.QUERY)
-            Log.i(TAG,"Buscaste: $query")
-            val myToast = Toast.makeText(applicationContext,"Buscaste: $query", Toast.LENGTH_LONG)
-            myToast.setGravity(Gravity.START,200,200)
+            Log.i(TAG, "Buscaste: $query")
+            val myToast = Toast.makeText(applicationContext, "Buscaste: $query", Toast.LENGTH_LONG)
             myToast.show()
 
-            if (query != null) {
-                searchByName(query)
-            }
+            query?.let { searchBy(it) }
         }
     }
 
 
-    private fun replaceFragment(fragment: Fragment){
+    private fun replaceFragment(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.nav_host_fragment_content_main, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
 
-    private fun searchByName(query: String) {
-        doAsync {
-            val call: retrofit2.Response<Response>? = ApiClient.getRetrofit().create(ApiService::class.java).getItemsBySearch("search?q=$query").execute()
-            val items = call?.body() as Response
-            uiThread {
-                if(items.paging?.total!! >= 0) {
-                    replaceFragment(GalleryFragment())
+    private fun searchBy(query: String) {
 
-                }else{
-                    val myToast = Toast.makeText(applicationContext,"Sin Resultados", Toast.LENGTH_LONG)
-                    myToast.setGravity(Gravity.START,200,200)
-                    myToast.show()
-                    //showErrorDialog()
-                }
+        Log.i(TAG, "entra a buscar $query")
+        val apiService: ApiService = ApiClient.getRetrofit().create(ApiService::class.java)
+        val result: Call<Response> = apiService.getItemsBySearch(query)
+        // val result: Call<Response> = apiService.getItemsBySearch()
+
+        result.enqueue(object : Callback<Response> {
+
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
+                val items = response.body()
+                Log.i(TAG, "objeto:" + Gson().toJson(items?.paging?.total))
+
+                val myToast =
+                    Toast.makeText(applicationContext, "Ok", Toast.LENGTH_LONG)
+                myToast.show()
+
+                /*  if (items.paging?.total!! >= 0) {
+
+                      replaceFragment(GalleryFragment())
+
+                  } else {
+                      val myToast =
+                          Toast.makeText(applicationContext, "Sin Resultados", Toast.LENGTH_LONG)
+                      myToast.show()
+                  }*/
             }
-        }
+
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                val myToast =
+                    Toast.makeText(applicationContext, "Error", Toast.LENGTH_LONG)
+                myToast.show()
+            }
+        })
     }
 }
