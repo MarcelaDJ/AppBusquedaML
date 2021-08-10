@@ -9,6 +9,7 @@ import retrofit2.http.Query
 import retrofit2.http.Url
 
 interface ApiService {
-    @GET(Constants.SITE_ID+"/search")
+  //  @GET(Constants.SITE_ID+"/search")
+    @GET("search")
     fun getItemsBySearch(@Query("q") search: String?): Call<Response>
 }

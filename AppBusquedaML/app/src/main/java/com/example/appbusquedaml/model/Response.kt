@@ -41,7 +41,7 @@ data class Response(
 data class PricesItem(
 
 	@field:SerializedName("amount")
-	val amount: Int? = null,
+	val amount: Double? = null,
 
 	@field:SerializedName("metadata")
 	val metadata: Metadata? = null,
@@ -207,7 +207,7 @@ data class AttributesItem(
 	val id: String? = null,
 
 	@field:SerializedName("source")
-	val source: Int? = null,
+	val source: Long? = null,
 
 	@field:SerializedName("value_name")
 	val valueName: String? = null
@@ -357,7 +357,7 @@ data class ResultsItem(
 	val installments: Installments? = null,
 
 	@field:SerializedName("price")
-	val price: Int? = null,
+	val price: Double? = null,
 
 	@field:SerializedName("official_store_id")
 	val officialStoreId: Any? = null,
@@ -555,7 +555,7 @@ data class ValuesItem(
 	val id: String? = null,
 
 	@field:SerializedName("source")
-	val source: Int? = null
+	val source: Long? = null
 )
 
 data class Shipping(

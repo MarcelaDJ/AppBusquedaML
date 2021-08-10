@@ -141,18 +141,17 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, "Ok", Toast.LENGTH_LONG)
                 myToast.show()
 
-                /*  if (items.paging?.total!! >= 0) {
-
-                      replaceFragment(GalleryFragment())
-
-                  } else {
-                      val myToast =
-                          Toast.makeText(applicationContext, "Sin Resultados", Toast.LENGTH_LONG)
-                      myToast.show()
-                  }*/
+                if (items?.paging?.total!! >= 0) {
+                    replaceFragment(GalleryFragment())
+                } else {
+                    val myToast =
+                        Toast.makeText(applicationContext, "Sin Resultados", Toast.LENGTH_LONG)
+                    myToast.show()
+                }
             }
 
             override fun onFailure(call: Call<Response>, t: Throwable) {
+                Log.i(TAG, "t: $t")
                 val myToast =
                     Toast.makeText(applicationContext, "Error", Toast.LENGTH_LONG)
                 myToast.show()
