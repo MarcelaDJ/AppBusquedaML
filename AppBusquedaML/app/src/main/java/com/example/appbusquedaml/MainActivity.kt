@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.Menu
 import android.widget.SearchView
 import android.widget.Toast
@@ -24,7 +23,6 @@ import com.example.appbusquedaml.model.Response
 import com.example.appbusquedaml.ui.gallery.GalleryFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson
-import org.jetbrains.anko.doAsync
 import retrofit2.Call
 import retrofit2.Callback
 
