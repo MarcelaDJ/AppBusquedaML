@@ -6,21 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appbusquedaml.R
 import com.example.appbusquedaml.adapter.ResponseAdapter
 import com.example.appbusquedaml.databinding.FragmentGalleryBinding
 import com.example.appbusquedaml.model.Response
 
-class GalleryFragment : Fragment() {
+class GalleryFragment() : Fragment() {
 
     private lateinit var galleryViewModel: GalleryViewModel
     private var _binding: FragmentGalleryBinding? = null
     private val TAG = GalleryFragment::class.java.simpleName
     private lateinit var responseList: RecyclerView
     private val binding get() = _binding!!
+    val data= response
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +45,13 @@ class GalleryFragment : Fragment() {
 
         val adapter = ResponseAdapter()
         responseList.adapter = adapter
-        adapter.submitList(List<Response>())
+        responseList.layoutManager = LinearLayoutManager(context)
+        adapter.submitList(data)
+        adapter.onItemClick = { it ->
+           // DetailHistoryActivity().startActivity(this, it.id.toString())
+        }
+
+
     }
 
     override fun onDestroyView() {

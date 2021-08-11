@@ -140,7 +140,8 @@ class MainActivity : AppCompatActivity() {
                 myToast.show()
 
                 if (items?.paging?.total!! >= 0) {
-                    replaceFragment(GalleryFragment())
+                    List() <Response>=response
+                    replaceFragment(GalleryFragment(response))
                 } else {
                     val myToast =
                         Toast.makeText(applicationContext, "Sin Resultados", Toast.LENGTH_LONG)

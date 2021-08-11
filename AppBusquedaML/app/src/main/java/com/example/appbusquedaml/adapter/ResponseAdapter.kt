@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appbusquedaml.R
 import com.example.appbusquedaml.model.Response
@@ -16,7 +14,7 @@ class ResponseAdapter :
     RecyclerView.Adapter<ResponseAdapter.ResponseViewHolder>() {
 
     var onItemClick: ((Int) -> Unit)? = null
-    var responseItems = listOf<Response>()
+    var responseItems =  listOf<Response>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -56,7 +54,6 @@ class ResponseAdapter :
                 if (it == true) {
                     shipping.text = "Envio gratis"
                 }
-
             }
             availability.text =
                 "Disponibles " + response.results?.get(position)?.availableQuantity.toString()
@@ -65,12 +62,12 @@ class ResponseAdapter :
             rateNumber.text =
                 response.results?.get(position)?.seller?.sellerReputation?.transactions?.total.toString()
         }
-
-
     }
 
-    override fun getItemCount(): Int {
-        return responseItems.size
+    override fun getItemCount() = responseItems.size
+
+    fun submitList(responseList: retrofit2.Response<Response>) {
+        responseItems= responseList
     }
 }
 
