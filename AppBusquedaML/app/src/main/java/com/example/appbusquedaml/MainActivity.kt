@@ -48,8 +48,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                //  R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow), drawerLayout)
-                R.id.nav_home, R.id.nav_slideshow
+                R.id.nav_home
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -91,9 +90,6 @@ class MainActivity : AppCompatActivity() {
         if (Intent.ACTION_SEARCH == intent.action) {
             val query = intent.getStringExtra(SearchManager.QUERY)
             Log.i(TAG, "Buscaste: $query")
-            val myToast = Toast.makeText(applicationContext, "Buscaste: $query", Toast.LENGTH_LONG)
-            myToast.show()
-
             query?.let { searchBy(it) }
         }
     }

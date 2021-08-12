@@ -32,6 +32,10 @@ class ResponseAdapter :
     override fun onBindViewHolder(holder: ResponseViewHolder, position: Int) {
         val response = responseItems?.get(position)
         holder.bind(response)
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(position)
+        }
+
     }
 
     class ResponseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -53,19 +57,21 @@ class ResponseAdapter :
             title.text = response?.title
             price.text = response?.price.toString()
             quotes.text =
-                "en " + response?.installments?.quantity.toString() + "x " + response?.installments?.amount.toString()
+                "en " + response?.installments?.quantity.toString() + "x " + response?.installments
+                    ?.amount.toString()
 
             response?.shipping?.freeShipping.let {
                 if (it == true) {
                     shipping.text = "Envio gratis"
                 }
             }
-            availability.text =
-                "Disponibles " + response?.availableQuantity.toString()
-            rate.rating =
+            availability.text = "Disponibles " + response?.availableQuantity.toString()
+            var percentaje =
                 response?.seller?.sellerReputation?.transactions?.ratings?.positive?.toFloat()!!
-            rateNumber.text =
-                response?.seller?.sellerReputation?.transactions?.total.toString()
+
+            rate.rating = (percentaje * 5)
+            rateNumber.text = response?.seller?.sellerReputation?.transactions?.total.toString()
+
         }
     }
 

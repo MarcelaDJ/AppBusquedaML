@@ -14,6 +14,8 @@ import com.example.appbusquedaml.R
 import com.example.appbusquedaml.adapter.ResponseAdapter
 import com.example.appbusquedaml.databinding.FragmentGalleryBinding
 import com.example.appbusquedaml.model.ResultsItem
+import com.example.appbusquedaml.ui.slideshow.SlideshowFragment
+
 
 class GalleryFragment(results: List<ResultsItem?>?) : Fragment() {
 
@@ -22,7 +24,7 @@ class GalleryFragment(results: List<ResultsItem?>?) : Fragment() {
     private val TAG = GalleryFragment::class.java.simpleName
     private lateinit var responseList: RecyclerView
     private val binding get() = _binding!!
-    val data= results
+    val data = results
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,20 +47,34 @@ class GalleryFragment(results: List<ResultsItem?>?) : Fragment() {
 
         val adapter = ResponseAdapter()
         responseList.adapter = adapter
-        responseList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        responseList.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         if (data != null) {
             Log.i(TAG, "data: ${data.size}")
         }
         adapter.submitList(data)
         adapter.onItemClick = { it ->
-           // DetailHistoryActivity().startActivity(this, it.id.toString())  LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            val myToast = Toast.makeText(context, "toca: $it", Toast.LENGTH_LONG)
+            myToast.show()
+            //replaceFragment(SlideshowFragment(it, data))
         }
-
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+
+        val slideshowFragment: SlideshowFragment? =
+            requireFragmentManager().findFragmentById(com.example.appbusquedaml.R.id.nav_host_fragment_content_main) as SlideshowFragment?
+        requireFragmentManager().beginTransaction()
+            .replace(
+                com.example.appbusquedaml.R.id.nav_host_fragment_content_main,
+                fragment
+            )
+            .addToBackStack(null)
+            .commit()
     }
 }

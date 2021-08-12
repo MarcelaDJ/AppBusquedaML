@@ -8,10 +8,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.appbusquedaml.R
 import com.example.appbusquedaml.databinding.FragmentSlideshowBinding
+import com.example.appbusquedaml.model.ResultsItem
 
-class SlideshowFragment : Fragment() {
+class SlideshowFragment(i: Int, data: List<ResultsItem?>?) : Fragment() {
 
     private lateinit var slideshowViewModel: SlideshowViewModel
     private var _binding: FragmentSlideshowBinding? = null
