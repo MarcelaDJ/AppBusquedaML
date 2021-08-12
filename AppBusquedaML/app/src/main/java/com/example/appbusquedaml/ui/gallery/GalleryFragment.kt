@@ -15,6 +15,7 @@ import com.example.appbusquedaml.adapter.ResponseAdapter
 import com.example.appbusquedaml.databinding.FragmentGalleryBinding
 import com.example.appbusquedaml.model.ResultsItem
 import com.example.appbusquedaml.ui.slideshow.SlideshowFragment
+import kotlin.properties.Delegates
 
 
 class GalleryFragment(results: List<ResultsItem?>?) : Fragment() {
@@ -25,6 +26,7 @@ class GalleryFragment(results: List<ResultsItem?>?) : Fragment() {
     private lateinit var responseList: RecyclerView
     private val binding get() = _binding!!
     val data = results
+    var indexPos by Delegates.notNull<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,9 +56,11 @@ class GalleryFragment(results: List<ResultsItem?>?) : Fragment() {
         }
         adapter.submitList(data)
         adapter.onItemClick = { it ->
-            val myToast = Toast.makeText(context, "toca: $it", Toast.LENGTH_LONG)
-            myToast.show()
-            //replaceFragment(SlideshowFragment(it, data))
+           /* val myToast = Toast.makeText(context, "toca: $it", Toast.LENGTH_LONG)
+            myToast.show()*/
+           indexPos=it
+            replaceFragment(SlideshowFragment(it, data))
+            //replaceFragment(it, data)
         }
     }
 
@@ -65,15 +69,11 @@ class GalleryFragment(results: List<ResultsItem?>?) : Fragment() {
         _binding = null
     }
 
-    private fun replaceFragment(fragment: Fragment) {
+    private fun replaceFragment(slideshowFragment: SlideshowFragment) {
 
-        val slideshowFragment: SlideshowFragment? =
-            requireFragmentManager().findFragmentById(com.example.appbusquedaml.R.id.nav_host_fragment_content_main) as SlideshowFragment?
-        requireFragmentManager().beginTransaction()
-            .replace(
-                com.example.appbusquedaml.R.id.nav_host_fragment_content_main,
-                fragment
-            )
+        val fr = SlideshowFragment(indexPos,data)
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment_content_main, fr)
             .addToBackStack(null)
             .commit()
     }

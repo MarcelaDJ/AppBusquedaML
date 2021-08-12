@@ -20,10 +20,16 @@
         <entry key="..\:/Users/herma/Documents/AppBusquedaML/AppBusquedaML/app/src/main/res/menu/main.xml" value="0.33" />
         <entry key="..\:/Users/herma/Documents/AppBusquedaML/AppBusquedaML/app/src/main/res/menu/options_menu.xml" value="0.33" />
         <entry key="..\:/Users/herma/Documents/AppBusquedaML/AppBusquedaML/app/src/main/res/xml/searchable.xml" value="0.2384428223844282" />
+        <entry key="..\:/Users/mpduenasj/Documents/MarcelaDJ/AndroidStudioProjects/appml/AppBusquedaML/AppBusquedaML/app/src/main/res/layout/fragment_home.xml" value="0.25885416666666666" />
+        <entry key="..\:/Users/mpduenasj/Documents/MarcelaDJ/AndroidStudioProjects/appml/AppBusquedaML/AppBusquedaML/app/src/main/res/layout/fragment_slideshow.xml" value="0.2515625" />
+        <entry key="..\:/Users/mpduenasj/Documents/MarcelaDJ/AndroidStudioProjects/appml/AppBusquedaML/AppBusquedaML/app/src/main/res/layout/nav_header_main.xml" value="0.25885416666666666" />
+        <entry key="..\:/Users/mpduenasj/Documents/MarcelaDJ/AndroidStudioProjects/appml/AppBusquedaML/AppBusquedaML/app/src/main/res/layout/product_item.xml" value="0.1" />
+        <entry key="..\:/Users/mpduenasj/Documents/MarcelaDJ/AndroidStudioProjects/appml/AppBusquedaML/AppBusquedaML/app/src/main/res/menu/activity_main_drawer.xml" value="0.25885416666666666" />
+        <entry key="..\:/Users/mpduenasj/Documents/MarcelaDJ/AndroidStudioProjects/appml/AppBusquedaML/AppBusquedaML/app/src/main/res/menu/main.xml" value="0.25885416666666666" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
