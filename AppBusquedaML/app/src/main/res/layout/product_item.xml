@@ -2,97 +2,110 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
-    android:orientation="horizontal">
-
-    <ImageView
-        android:id="@+id/img_product"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
-        android:layout_margin="25dp"
-        tools:src="@drawable/pru" />
+    android:layout_height="182dp"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/info_product"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="17dp"
-        android:orientation="vertical">
+        android:layout_height="180dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_product"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_margin="25dp"
+            tools:src="@drawable/pru" />
 
         <LinearLayout
-            android:id="@+id/first_line"
+            android:id="@+id/info_product"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="17dp"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/title_product"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                tools:text="@string/sample_title" />
-
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:src="@drawable/ic_baseline_favorite_border_24" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/price_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="@string/price_sample" />
-
-        <TextView
-            android:id="@+id/quotes_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="@string/quota_sample" />
-
-        <TextView
-            android:id="@+id/shipping"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="@string/shipping_sample" />
-
-        <TextView
-            android:id="@+id/availability"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="@string/availability_sample" />
-
-        <LinearLayout
-            android:id="@+id/last_line"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="19dp"
-            android:orientation="horizontal">
-
-            <RatingBar
-                android:id="@+id/rating_product"
-                android:layout_width="220dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="-88dp"
-                android:layout_marginTop="-19dp"
-                android:progressTint="@color/blueML"
-                android:rating="4.5"
-                android:scaleX="0.2"
-                android:scaleY="0.2"
-                android:secondaryProgressTint="@color/blueML" />
-
-            <TextView
-                android:id="@+id/rate_number"
+            <LinearLayout
+                android:id="@+id/first_line"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="-80dp"
-                tools:text="@string/score_sample" />
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/title_product"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    tools:text="@string/sample_title" />
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_baseline_favorite_border_24" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/price_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="@string/price_sample" />
+
+            <TextView
+                android:id="@+id/quotes_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="@string/quota_sample" />
+
+            <TextView
+                android:id="@+id/shipping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="@string/shipping_sample" />
+
+            <TextView
+                android:id="@+id/availability"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="@string/availability_sample" />
+
+            <LinearLayout
+                android:id="@+id/last_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:orientation="horizontal">
+
+                <RatingBar
+                    android:id="@+id/rating_product"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-88dp"
+                    android:layout_marginTop="-19dp"
+                    android:isIndicator="true"
+                    android:progressTint="@color/blueML"
+                    android:rating="4.5"
+                    android:scaleX="0.2"
+                    android:scaleY="0.2"
+                    android:secondaryProgressTint="@color/blueML" />
+
+                <TextView
+                    android:id="@+id/rate_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-80dp"
+                    tools:text="@string/score_sample" />
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey" />
+
 </LinearLayout>

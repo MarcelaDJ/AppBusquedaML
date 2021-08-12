@@ -1,6 +1,7 @@
 package com.example.appbusquedaml.ui.gallery
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,16 +13,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.appbusquedaml.R
 import com.example.appbusquedaml.adapter.ResponseAdapter
 import com.example.appbusquedaml.databinding.FragmentGalleryBinding
-import com.example.appbusquedaml.model.Response
+import com.example.appbusquedaml.model.ResultsItem
 
-class GalleryFragment() : Fragment() {
+class GalleryFragment(results: List<ResultsItem?>?) : Fragment() {
 
     private lateinit var galleryViewModel: GalleryViewModel
     private var _binding: FragmentGalleryBinding? = null
     private val TAG = GalleryFragment::class.java.simpleName
     private lateinit var responseList: RecyclerView
     private val binding get() = _binding!!
-    val data= response
+    val data= results
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,10 +46,13 @@ class GalleryFragment() : Fragment() {
 
         val adapter = ResponseAdapter()
         responseList.adapter = adapter
-        responseList.layoutManager = LinearLayoutManager(context)
+        responseList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        if (data != null) {
+            Log.i(TAG, "data: ${data.size}")
+        }
         adapter.submitList(data)
         adapter.onItemClick = { it ->
-           // DetailHistoryActivity().startActivity(this, it.id.toString())
+           // DetailHistoryActivity().startActivity(this, it.id.toString())  LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         }
 
 

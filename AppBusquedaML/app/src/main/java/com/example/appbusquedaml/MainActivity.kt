@@ -135,13 +135,9 @@ class MainActivity : AppCompatActivity() {
                 val items = response.body()
                 Log.i(TAG, "objeto:" + Gson().toJson(items?.paging?.total))
 
-                val myToast =
-                    Toast.makeText(applicationContext, "Ok", Toast.LENGTH_LONG)
-                myToast.show()
-
                 if (items?.paging?.total!! >= 0) {
-                    List() <Response>=response
-                    replaceFragment(GalleryFragment(response))
+
+                    replaceFragment(GalleryFragment(items.results))
                 } else {
                     val myToast =
                         Toast.makeText(applicationContext, "Sin Resultados", Toast.LENGTH_LONG)

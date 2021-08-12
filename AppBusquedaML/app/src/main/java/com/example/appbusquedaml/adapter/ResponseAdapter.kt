@@ -8,13 +8,15 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appbusquedaml.R
-import com.example.appbusquedaml.model.Response
+import com.example.appbusquedaml.model.ResultsItem
+import com.squareup.picasso.Picasso
+
 
 class ResponseAdapter :
     RecyclerView.Adapter<ResponseAdapter.ResponseViewHolder>() {
 
     var onItemClick: ((Int) -> Unit)? = null
-    var responseItems =  listOf<Response>()
+    var responseItems: List<ResultsItem?>? = ArrayList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -28,7 +30,7 @@ class ResponseAdapter :
     }
 
     override fun onBindViewHolder(holder: ResponseViewHolder, position: Int) {
-        val response = responseItems[position]
+        val response = responseItems?.get(position)
         holder.bind(response)
     }
 
@@ -42,34 +44,40 @@ class ResponseAdapter :
         private val rate: RatingBar = view.findViewById(R.id.rating_product)
         private val rateNumber: TextView = view.findViewById(R.id.rate_number)
 
-        fun bind(response: Response) {
-            title.text = response.results?.get(position)?.title
-            price.text = response.results?.get(position)?.price.toString()
-            quotes.text =
-                "en " + response.results?.get(position)?.installments?.quantity.toString() + "x " + response.results?.get(
-                    position
-                )?.installments?.amount.toString()
+        fun bind(response: ResultsItem?) {
 
-            response.results?.get(adapterPosition)?.shipping?.freeShipping.let {
+             Picasso.get().load(response?.thumbnail)
+                 .resize(30, 30).into(tumbnail)
+            //Picasso.get().isLoggingEnabled = true
+
+            title.text = response?.title
+            price.text = response?.price.toString()
+            quotes.text =
+                "en " + response?.installments?.quantity.toString() + "x " + response?.installments?.amount.toString()
+
+            response?.shipping?.freeShipping.let {
                 if (it == true) {
                     shipping.text = "Envio gratis"
                 }
             }
             availability.text =
-                "Disponibles " + response.results?.get(position)?.availableQuantity.toString()
+                "Disponibles " + response?.availableQuantity.toString()
             rate.rating =
-                response.results?.get(position)?.seller?.sellerReputation?.transactions?.ratings?.positive?.toFloat()!!
+                response?.seller?.sellerReputation?.transactions?.ratings?.positive?.toFloat()!!
             rateNumber.text =
-                response.results?.get(position)?.seller?.sellerReputation?.transactions?.total.toString()
+                response?.seller?.sellerReputation?.transactions?.total.toString()
         }
     }
 
-    override fun getItemCount() = responseItems.size
+    override fun getItemCount(): Int {
+        return responseItems?.size!!
+    }
 
-    fun submitList(responseList: retrofit2.Response<Response>) {
-        responseItems= responseList
+    fun submitList(responseList: List<ResultsItem?>?) {
+        responseItems = responseList
     }
 }
+
 
 
 
