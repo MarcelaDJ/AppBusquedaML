@@ -66,24 +66,8 @@ class MainActivity : AppCompatActivity() {
         (menu.findItem(R.id.search).actionView as SearchView).apply {
             //  setSearchableInfo(searchManager.getSearchableInfo(ComponentName(this@MainActivity,SearchActivity::class.java)))
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
-            isIconifiedByDefault = false // Do not iconify the widget; expand it by default
+            isIconifiedByDefault = false
 
-            /*  setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                     override fun onQueryTextChange(newText: String?): Boolean {
-                         if(!newText.isNullOrBlank())
-                             Log.i(TAG,"Buscaste: $query")
-                         val myToast = Toast.makeText(applicationContext,"Buscaste: $query", Toast.LENGTH_LONG)
-                         myToast.setGravity(Gravity.LEFT,200,200)
-                         myToast.show()
-
-                         replaceFragment(GalleryFragment())
-                         return true
-                     }
-
-                     override fun onQueryTextSubmit(query: String?): Boolean {
-                         return false
-                     }
-                 })*/
         }
 
         return true

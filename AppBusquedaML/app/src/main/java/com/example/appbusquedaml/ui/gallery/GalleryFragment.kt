@@ -35,9 +35,8 @@ class GalleryFragment(results: List<ResultsItem?>?) : Fragment() {
         _binding = FragmentGalleryBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val myToast = Toast.makeText(context, "Gallery:", Toast.LENGTH_LONG)
-        myToast.show()
         setUpList(root)
+
         return root
     }
 

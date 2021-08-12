@@ -46,9 +46,9 @@ class ResponseAdapter :
 
         fun bind(response: ResultsItem?) {
 
-             Picasso.get().load(response?.thumbnail)
-                 .resize(30, 30).into(tumbnail)
-            //Picasso.get().isLoggingEnabled = true
+            Picasso.get().load(response?.thumbnail)
+                .resize(300, 300).into(tumbnail)
+            Picasso.get().isLoggingEnabled = true
 
             title.text = response?.title
             price.text = response?.price.toString()
